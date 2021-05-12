@@ -82,6 +82,7 @@ def initialize(args):
     c = config.Config()
     c.Username = args.username
     c.User_id = args.userid
+    c.User_list = args.userlist
     c.Search = args.search
     c.Geo = args.geo
     c.Location = args.location
@@ -324,11 +325,9 @@ def main():
             run.Profile(c)
     elif args.user_full:
         if args.userlist:
-            _userlist = loadUserList(args.userlist, "userlist")
-            for _user in _userlist:
-                args.username = _user
-                c = initialize(args)
-                run.Lookup(c)
+            args.userlist = args.userlist.split(",")
+            c = initialize(args)
+            run.Lookup(c)
         else:
             run.Lookup(c)
     elif args.timeline:

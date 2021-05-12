@@ -271,7 +271,14 @@ class Twint:
                 if get.Limit(self.config.Limit, self.count):
                     break
         elif self.config.Lookup:
-            await self.Lookup()
+
+            if self.config.User_list is not None:
+                logme.debug(__name__ + ':Twint:main:user_list')
+                for username in self.config.User_list:
+                    self.config.Username = username
+                    await self.Lookup()
+            else:
+                await self.Lookup()
         else:
             logme.debug(__name__ + ':Twint:main:not-search+since+until')
             while True:
@@ -309,7 +316,6 @@ class Twint:
                 self.config.Username = await get.Username(self.config.User_id, self.config.Bearer_token,
                                                           self.config.Guest_token)
             await get.User(self.config.Username, self.config, db.Conn(self.config.Database))
-
         except Exception as e:
             logme.exception(__name__ + ':Twint:Lookup:Unexpected exception occurred.')
             raise

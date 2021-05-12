@@ -23,7 +23,7 @@ def User(ur):
         if 'errors' in ur:
             msg = ur['errors'][0]['message']
         logme.fatal(msg)
-        raise RuntimeError(msg)
+        return
     _usr = user()
     _usr.id = ur['data']['user']['rest_id']
     _usr.name = ur['data']['user']['legacy']['name']

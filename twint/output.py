@@ -175,6 +175,8 @@ async def Users(u, config, conn):
     global users_list
 
     user = User(u)
+    if user is None:
+        return
     output = format.User(config.Format, user)
 
     if config.Database:

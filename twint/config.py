@@ -5,6 +5,7 @@ from typing import Optional
 class Config:
     Username: Optional[str] = None
     User_id: Optional[str] = None
+    User_list: Optional[list] = None
     Search: Optional[str] = None
     Lookup: bool = False
     Geo: str = ""
